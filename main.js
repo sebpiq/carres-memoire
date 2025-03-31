@@ -75,7 +75,6 @@ const initialize = () => {
         const onSquareClick = async (event) => {
             const square = event.target
             const squareNum = parseInt(square.querySelector('.number').innerHTML)
-            console.log(square.querySelector('.number').innerText, squareNum, gameCounter)
             if (squareNum === gameCounter) {
                 square.classList.add('visible')
                 square.classList.add('success')
