@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Silkscreen';
+    src: local('Silkscreen'),
+        url('./fonts/Silkscreen-Regular.ttf') format('woff');
+}
+
+:root {
+    --color1: rgb(0, 0, 74);
+    --color1-lighter: rgba(111, 113, 255, 0.75);
+    --color2: rgb(255, 255, 255);
+    --color-success: rgb(0, 88, 0);
+    --color-failed: rgb(201, 0, 47);
+    --color-control: #ccc;
+    --color-control-hover: #ddd;
+    --background-color1: #000;
+    --background-color2: #a8a8a8;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Silkscreen', sans-serif;
+    background-color: var(--background-color2);
+}
+
+input, button {
+    font-family: 'Silkscreen', sans-serif;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-control);
+    border: none;
+}
+
+input:hover, button:hover {
+    background-color: var(--color-control-hover);
+}
+
+input {
+    width: 10em;
+}
+
+button {
+    cursor: pointer;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+main {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    background-color: var(--background-color1);
+}
+
+header {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+}
+
+#parameters {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 1rem;
+}
+
+#parameters > div {
+    margin-bottom: 0.5rem;
+}
+
+#parameters > div:last-child {
+    margin-bottom: 0;
+}
+
+.square {
+    position: absolute;
+    background-color: var(--color1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 4px 4px 4px -2px var(--color1-lighter);
+}
+
+.square:hover:not(.success):not(.failed):not(.visible) {
+    background-color: var(--color1-lighter);
+}
+
+.number {
+    position: absolute;
+    color: var(--color2);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5rem;
+    visibility: hidden;
+}
+
+.square.visible .number {
+    visibility: visible;
+    font-size: 200%;
+}
+
+.square.success {
+    background-color: var(--color-success);
+    box-shadow: 4px 4px 4px -2px var(--color-success);
+}
+
+.square.failed {
+    background-color: var(--color-failed);
+    box-shadow: 4px 4px 4px -2px var(--color-failed);
+}
+
+#img-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#img-container.visible {
+    display: flex;
+}
+
+#monkey-clapping {
+    display: none;
+}
+
+#monkey-clapping.visible, #monkey-dancing.visible {
+    display: block;
+}

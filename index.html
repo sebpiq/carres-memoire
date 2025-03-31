@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Carrés numérotés - jeu de mémoire instantanée</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Jeu de mémoire instantanée">
+    <meta name="keywords" content="jeu, mémoire, instantanée, carrés, numérotés">
+    <meta name="author" content="Mickaël Andrieu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="root">
+        <header>
+            <h1>Carrés numérotés</h1>
+            <p>Jeu de mémoire instantanée</p>
+            <div id="controls">
+                <div id="parameters">
+                    <div>
+                        <label for="square-count">Nombre de carrés :</label>
+                        <input type="number" id="square-count" value="9" min="2" max="50" />
+                    </div>
+                    <div>
+                        <label for="visible-duration">Durée d'affichage (ms) :</label>
+                        <input type="number" id="visible-duration" value="1000" min="500" max="5000" />
+                    </div>
+                </div>
+                <button onclick="Game.start()">Démarrer</button>
+            </div>
+        </header>
+        <main>
+            <div id="img-container">
+                <img id="monkey-clapping" src="images/clapping.gif" />
+                <img id="monkey-dancing" src="images/dancing.gif" />
+            </div>
+        </main>
+        <footer>
+            <p>BLABLA description, about etc.</p>
+        </footer>
+    </div>
+    <script>
+        const Game = initialize()
+        Game.start()
+    </script>
+</body>
+</html>
