@@ -4,8 +4,8 @@ const settings = {
     visibleDuration: 2000,
     minSquareSize: 50,
     maxBoardSize: 600,
-    durationShowingResults: 1000,
-    durationShowingMonkey: 2000,
+    durationShowingResults: 400,
+    durationShowingMonkey: 2500,
 }
 
 const initialize = () => {
@@ -69,50 +69,75 @@ const initialize = () => {
         squares.forEach(square => {
             square.classList.add('visible')
         })
-        await timeout(settings.visibleDuration)
-        let gameCounter = 1
 
-        const onSquareClick = async (event) => {
-            const square = event.target
+        let gameCounter = 1
+        const onSquareClick = function(){
+            const square = this
             const squareNum = parseInt(square.querySelector('.number').innerHTML)
             if (squareNum === gameCounter) {
                 square.classList.add('visible')
                 square.classList.add('success')
                 gameCounter += 1
-                // Victoire
                 if (gameCounter > settings.squareCount) {
-                    await timeout(settings.durationShowingResults)
-                    imgContainer.classList.add('visible')
-                    victoryImg.classList.add('visible')
-                    await timeout(settings.durationShowingMonkey)
-                    imgContainer.classList.remove('visible')
-                    victoryImg.classList.remove('visible')
-                    start()
+                    victory()
                 }
-            // Défaite
             } else {
-                squares.forEach(square => {
-                    square.classList.add('visible')
-                    square.classList.add('failed')
-                })
-                await timeout(settings.durationShowingResults)
-                imgContainer.classList.add('visible')
-                defeatImg.classList.add('visible')
-                await timeout(settings.durationShowingMonkey)
-                imgContainer.classList.remove('visible')
-                defeatImg.classList.remove('visible')
-                start()
+                defeat()
             }
         }
 
         squares.forEach(square => {
-            square.classList.remove('visible')
             square.onclick = onSquareClick
+        })
+
+        await timeout(settings.visibleDuration)
+
+        squares.forEach(square => {
+            if (square.classList.contains('success') || square.classList.contains('failed')) {
+                return
+            }
+            square.classList.remove('visible')
         })
         
     }
 
-    return { start }
+    const victory = async () => {
+        imgContainer.classList.add('visible')
+        await timeout(settings.durationShowingResults)
+        victoryImg.classList.add('visible')
+        await timeout(settings.durationShowingMonkey)
+        imgContainer.classList.remove('visible')
+        victoryImg.classList.remove('visible')
+        start()
+    }
+
+    const defeat = async () => {
+        const squares = document.querySelectorAll('.square')
+        squares.forEach(square => {
+            square.classList.add('visible')
+            square.classList.add('failed')
+        })
+        imgContainer.classList.add('visible')
+        await timeout(settings.durationShowingResults)
+        defeatImg.classList.add('visible')
+        await timeout(settings.durationShowingMonkey)
+        imgContainer.classList.remove('visible')
+        defeatImg.classList.remove('visible')
+        start()
+    }
+
+    const openDialog = () => {
+        const dialog = document.querySelector('dialog')
+        dialog.showModal()
+    }
+    
+    const closeDialog = () => {
+        const dialog = document.querySelector('dialog')
+        start()
+        dialog.close()
+    }
+
+    return { start, openDialog, closeDialog }
 }
 
 const randomPosition = (boardSize, squareSize) => {

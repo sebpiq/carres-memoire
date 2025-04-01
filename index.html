@@ -18,28 +18,40 @@
             <h1>Carrés numérotés</h1>
             <p>Jeu de mémoire instantanée</p>
             <div id="controls">
-                <div id="parameters">
-                    <div>
-                        <label for="square-count">Nombre de carrés :</label>
-                        <input type="number" id="square-count" value="9" min="2" max="50" />
-                    </div>
-                    <div>
-                        <label for="visible-duration">Durée d'affichage (ms) :</label>
-                        <input type="number" id="visible-duration" value="1000" min="500" max="5000" />
-                    </div>
-                </div>
-                <button onclick="Game.start()">Démarrer</button>
+                <button onclick="Game.start()">start</button>
             </div>
         </header>
+        
         <main>
             <div id="img-container">
                 <img id="monkey-clapping" src="images/clapping.gif" />
                 <img id="monkey-dancing" src="images/dancing.gif" />
             </div>
         </main>
+
         <footer>
             <p>BLABLA description, about etc.</p>
         </footer>
+
+
+        <div id="open-dialog-container">
+            <button id="open-dialog" onclick="Game.openDialog()">⚙</button>
+        </div>
+
+        <dialog id="game-dialog">
+            <button id="close-dialog" onclick="Game.closeDialog()">✕</button>
+            <h2>Paramètres du jeu</h2>
+            <div id="parameters">
+                <div>
+                    <label for="square-count">Nombre de carrés :</label>
+                    <input type="number" id="square-count" value="9" min="2" max="50" />
+                </div>
+                <div>
+                    <label for="visible-duration">Durée d'affichage (ms) :</label>
+                    <input type="number" id="visible-duration" value="1000" min="500" max="5000" />
+                </div>
+            </div>
+        </dialog>
     </div>
     <script>
         const Game = initialize()

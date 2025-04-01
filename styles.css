@@ -10,15 +10,19 @@
 }
 
 :root {
-    --color1: rgb(0, 0, 74);
-    --color1-lighter: rgba(111, 113, 255, 0.75);
+    --color1: rgb(0, 129, 249);
+    --color1-lighter: rgba(134, 223, 253, 0.75);
     --color2: rgb(255, 255, 255);
-    --color-success: rgb(0, 88, 0);
+    --color3: rgb(238, 0, 99);
+    --color3-lighter: rgb(255, 0, 127);
+    --color-success: rgb(75, 205, 75);
     --color-failed: rgb(201, 0, 47);
-    --color-control: #ccc;
-    --color-control-hover: #ddd;
-    --background-color1: #000;
+    --color-control: var(--color2);
+    --background-color-control: #303030;
+    --background-color-control-hover: #5e5e5e;
+    --background-color1: #111111;
     --background-color2: #a8a8a8;
+    --background-color-overlay: rgba(100, 100, 100, 0.9);
 }
 
 body, html {
@@ -30,13 +34,14 @@ body, html {
 
 input, button {
     font-family: 'Silkscreen', sans-serif;
-    padding: 0.5rem 1rem;
-    background-color: var(--color-control);
+    padding: 0.7rem 0.7rem;
+    background-color: var(--background-color-control);
+    color: var(--color-control);
     border: none;
 }
 
 input:hover, button:hover {
-    background-color: var(--color-control-hover);
+    background-color: var(--background-color-control-hover);
 }
 
 input {
@@ -47,9 +52,20 @@ button {
     cursor: pointer;
 }
 
+dialog {
+    background-color: var(--background-color1);
+    color: var(--color2);
+    border: none;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+dialog::backdrop {
+    background-color: var(--background-color-overlay);
+}
+
 #root {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -63,16 +79,33 @@ main {
     height: 100%;
     flex: 1;
     background-color: var(--background-color1);
+    min-width: 50%;
 }
 
 header {
     text-align: center;
-    padding: 1rem 0;
+    padding: 1rem;
+}
+
+footer {
+    padding: 1rem;
 }
 
 #controls {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#controls button {
+    text-transform: uppercase;
+    background-color: var(--color3);
+    font-size: 180%;
+}
+
+#controls button:hover {
+    background-color: var(--color3-lighter);
 }
 
 #parameters {
@@ -109,16 +142,16 @@ header {
 .number {
     position: absolute;
     color: var(--color2);
-    font-size: 1.5rem;
+    font-size: 200%;
     font-weight: bold;
     text-align: center;
     line-height: 1.5rem;
     visibility: hidden;
+    user-select: none;
 }
 
 .square.visible .number {
     visibility: visible;
-    font-size: 200%;
 }
 
 .square.success {
@@ -142,8 +175,9 @@ header {
     align-items: center;
     z-index: -1;
     opacity: 0;
+    background-color: var(--background-color-overlay);
     transition-property: opacity, z-index;
-    transition-duration: 200ms;
+    transition-duration: 100ms;
 }
 
 #img-container.visible {
@@ -159,9 +193,26 @@ header {
     transform: translate(-50%, -50%);
     opacity: 0;
     transition-property: opacity;
-    transition-duration: 200ms;
+    transition-duration: 100ms;
 }
 
 #img-container img.visible {
     opacity: 1;
+}
+
+#open-dialog-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#open-dialog-container button {
+    font-size: 200%;
+}
+
+#close-dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
 }
