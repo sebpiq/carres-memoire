@@ -57,6 +57,7 @@ dialog {
     color: var(--color2);
     border: none;
     font-family: 'Silkscreen', sans-serif;
+    padding: 2rem;
 }
 
 dialog::backdrop {
@@ -113,7 +114,6 @@ footer {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    margin-right: 1rem;
 }
 
 #parameters > div {
