@@ -23,13 +23,31 @@
     --background-color1: #686868;
     --background-color2: #a8a8a8;
     --background-color-overlay: rgba(100, 100, 100, 0.9);
+    --font-size-large-screen: 20px;
+    --font-size-med-screen: 14px;
+    --font-size-small-screen: 10px;
 }
 
 body, html {
     margin: 0;
     padding: 0;
+}
+
+body {
     font-family: 'Silkscreen', sans-serif;
     background-color: var(--background-color2);
+    font-size: var(--font-size-large-screen);
+}
+
+@media (max-width: 1200px) {
+    body {
+        font-size: var(--font-size-med-screen);
+    }
+}
+@media (max-width: 800px) {
+    body {
+        font-size: var(--font-size-small-screen);
+    }
 }
 
 input, button {
@@ -71,6 +89,7 @@ dialog::backdrop {
     align-items: center;
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 main {
@@ -83,6 +102,7 @@ main {
     height: 100%;
     flex: 1;
     min-width: 50%;
+    min-height: 0;
 }
 
 /* Fix width so that the board stuck in the middle immediately has a reliabl size
@@ -155,7 +175,7 @@ footer {
 .number {
     position: absolute;
     color: var(--color2);
-    font-size: 200%;
+    font-size: 220%;
     font-weight: bold;
     text-align: center;
     line-height: 1.5rem;
@@ -201,12 +221,14 @@ footer {
 
 #img-container img {
     position: absolute;
+    width: 75%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
     transition-property: opacity;
     transition-duration: 100ms;
+    filter: grayscale(0.3) brightness(1.2) hue-rotate(100deg);
 }
 
 #img-container img.visible {
@@ -228,4 +250,27 @@ footer {
     top: 0;
     right: 0;
     z-index: 10;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    #root {
+        flex-direction: column;
+    }
+    footer, header {
+        width: 100%;
+        text-align: center;
+    }
+    main {
+        flex: 1;
+        display: flex;
+        min-height: 0; 
+    }
+    #img-container img {
+        width: 100%;
+    }
+    #open-dialog-container {
+        top: initial;
+        bottom: 0;
+    }
 }
