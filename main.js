@@ -1,9 +1,8 @@
 const settings = {
     squareCount: 10,
-    padding: 10,
     visibleDuration: 2000,
+    padding: 10,
     maxSquareSize: 120,
-    minBoardColumnsRows: 3,
     durationShowingResults: 400,
     durationShowingMonkey: 2500,
     windowResizeDebounceDelay: 200,
@@ -22,9 +21,21 @@ const initialize = () => {
         clearBoard()
         dumpSettings()
         const squares = prepareBoard()
-
         let gameCounter = 1
+
+        const hideSquares = () => {
+            squares.forEach(square => {
+                if (square.classList.contains('success') || square.classList.contains('failed')) {
+                    return
+                }
+                square.classList.remove('visible')
+            })
+        }
+
         const onSquareClick = function() {
+            if (gameCounter === 1) {
+                hideSquares()
+            }
             const square = this
             const squareNum = parseInt(square.querySelector('.number').innerHTML)
             if (squareNum === gameCounter) {
@@ -42,16 +53,8 @@ const initialize = () => {
         squares.forEach(square => {
             square.onclick = onSquareClick
         })
-
         await _timeout(settings.visibleDuration)
-
-        squares.forEach(square => {
-            if (square.classList.contains('success') || square.classList.contains('failed')) {
-                return
-            }
-            square.classList.remove('visible')
-        })
-        
+        hideSquares()
     }
 
     const clearBoard = () => {
@@ -61,18 +64,20 @@ const initialize = () => {
     const prepareBoard = () => {
         const mainBB = main.getBoundingClientRect()
         let boardSize = Math.min(mainBB.width, mainBB.height)
-        const maxSquareSizeColRows = boardSize / settings.minBoardColumnsRows
+        const minColRows = Math.ceil(Math.sqrt(settings.squareCount))
+        const maxSquareSizeColRows = boardSize / minColRows
+        console.log('maxSquareSizeColRows', minColRows, maxSquareSizeColRows)
+
         const positions = []
 
         let divider = 20
         let squareSize = boardSize / divider
-        while (squareSize < settings.maxSquareSize && squareSize < maxSquareSizeColRows) {
+        while (squareSize < maxSquareSizeColRows) {
             divider -= 1
             squareSize = boardSize / divider
         }
         divider += 1
         squareSize = Math.floor(boardSize / divider)
-        console.log('divider', divider, boardSize, squareSize, squareSize * divider)
         boardSize = squareSize * divider
     
         board.style.width = `${boardSize}px`
@@ -110,12 +115,12 @@ const initialize = () => {
 
     const dumpSettings = () => {
         settings.squareCount = parseInt(squareCountInput.value)
-        settings.visibleDuration = parseInt(visibleDurationInput.value)
+        settings.visibleDuration = parseInt(visibleDurationInput.value) * 1000
     }
 
     const loadSettings = () => {
         squareCountInput.value = settings.squareCount
-        visibleDurationInput.value = settings.visibleDuration
+        visibleDurationInput.value = Math.round(settings.visibleDuration / 1000)
     }
 
     const showVictory = async () => {
