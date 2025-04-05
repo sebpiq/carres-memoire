@@ -2,15 +2,16 @@ const settings = {
     squareCount: 10,
     padding: 10,
     visibleDuration: 2000,
-    minSquareSize: 50,
-    maxBoardSize: 600,
+    maxSquareSize: 120,
+    minBoardColumnsRows: 3,
     durationShowingResults: 400,
     durationShowingMonkey: 2500,
     windowResizeDebounceDelay: 200,
 }
 
 const initialize = () => {
-    const board = document.querySelector('main')
+    const main = document.querySelector('main')
+    const board = document.querySelector('#board')
     const imgContainer = document.querySelector('#img-container')
     const victoryImg = imgContainer.querySelector('#monkey-clapping')
     const defeatImg = imgContainer.querySelector('#monkey-dancing')
@@ -58,30 +59,31 @@ const initialize = () => {
     }
 
     const prepareBoard = () => {
-        const boardBB = board.getBoundingClientRect()
-        const boardWidth = Math.min(boardBB.width, settings.maxBoardSize)
-        const boardPaddingX = (boardBB.width - boardWidth) / 2
-        const boardHeight = Math.min(boardBB.height, settings.maxBoardSize)
-        const boardPaddingY = (boardBB.height - boardHeight) / 2
+        const mainBB = main.getBoundingClientRect()
+        let boardSize = Math.min(mainBB.width, mainBB.height)
+        const maxSquareSizeColRows = boardSize / settings.minBoardColumnsRows
         const positions = []
 
-        let divider = 8
-        let squareSize = Math.min(boardWidth, boardHeight) / divider
-        while (squareSize < settings.minSquareSize) {
-            divider += 1
-            squareSize = Math.min(boardWidth, boardHeight) / divider
+        let divider = 20
+        let squareSize = boardSize / divider
+        while (squareSize < settings.maxSquareSize && squareSize < maxSquareSizeColRows) {
+            divider -= 1
+            squareSize = boardSize / divider
         }
-        squareSize = Math.floor(squareSize)
+        divider += 1
+        squareSize = Math.floor(boardSize / divider)
+        console.log('divider', divider, boardSize, squareSize, squareSize * divider)
+        boardSize = squareSize * divider
     
-        const xOffset = boardPaddingX + (boardWidth % squareSize) / 2
-        const yOffset = boardPaddingY + (boardHeight % squareSize) / 2
+        board.style.width = `${boardSize}px`
+        board.style.height = `${boardSize}px`
 
         for (let i = 0; i < settings.squareCount; i++) {
-            let x = _randomPosition(boardWidth, squareSize)
-            let y = _randomPosition(boardHeight, squareSize)
+            let x = _randomPosition(boardSize, squareSize)
+            let y = _randomPosition(boardSize, squareSize)
             while (positions.find(p => p.x === x && p.y === y)) {
-                x = _randomPosition(boardWidth, squareSize)
-                y = _randomPosition(boardHeight, squareSize)
+                x = _randomPosition(boardSize, squareSize)
+                y = _randomPosition(boardSize, squareSize)
             }
             positions.push({ x, y })
     
@@ -89,8 +91,8 @@ const initialize = () => {
             square.classList.add('square')
             square.style.width = `${squareSize - settings.padding}px`
             square.style.height = `${squareSize - settings.padding}px`
-            square.style.left = `${xOffset + x + settings.padding / 2}px`
-            square.style.top = `${yOffset + y + settings.padding / 2}px`
+            square.style.left = `${x + settings.padding / 2}px`
+            square.style.top = `${y + settings.padding / 2}px`
             board.appendChild(square)
     
             const number = document.createElement('span')
@@ -173,7 +175,6 @@ const _randomPosition = (boardSize, squareSize) => {
 const _debounce = (fn, delay) => {
     let timeoutId
     return function(...args) {
-        console.log('Debounce called')
         if (timeoutId) {
             clearTimeout(timeoutId)
         }

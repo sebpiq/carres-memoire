@@ -20,7 +20,7 @@
     --color-control: var(--color2);
     --background-color-control: #303030;
     --background-color-control-hover: #5e5e5e;
-    --background-color1: #111111;
+    --background-color1: #686868;
     --background-color2: #a8a8a8;
     --background-color-overlay: rgba(100, 100, 100, 0.9);
 }
@@ -75,12 +75,20 @@ dialog::backdrop {
 
 main {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     flex: 1;
-    background-color: var(--background-color1);
     min-width: 50%;
+}
+
+/* Fix width so that the board stuck in the middle immediately has a reliabl size
+for layout calculation */
+header, footer {
+    width: 25%;
 }
 
 header {
@@ -122,6 +130,11 @@ footer {
 
 #parameters > div:last-child {
     margin-bottom: 0;
+}
+
+#board {
+    background-color: var(--background-color1);
+    position: relative;
 }
 
 .square {
