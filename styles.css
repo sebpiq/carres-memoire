@@ -9,7 +9,7 @@
         url('./fonts/Silkscreen-Regular.ttf') format('woff');
     font-family: 'Welbut';
     src: local('Welbut'),
-        url('./fonts/Welbut__.ttf') format('woff');
+        url('./fonts/Welbut__.ttf');
 }
 
 
