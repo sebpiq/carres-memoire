@@ -7,7 +7,11 @@
     font-family: 'Silkscreen';
     src: local('Silkscreen'),
         url('./fonts/Silkscreen-Regular.ttf') format('woff');
+    font-family: 'Welbut';
+    src: local('Welbut'),
+        url('./fonts/Welbut__.ttf') format('woff');
 }
+
 
 :root {
     --color1: rgb(0, 129, 249);
@@ -52,7 +56,7 @@ body {
 }
 
 input, button {
-    font-family: 'Silkscreen', sans-serif;
+    font-family: 'Welbut', sans-serif;
     padding: 0.7rem 0.7rem;
     background-color: var(--background-color-control);
     color: var(--color-control);
@@ -75,7 +79,7 @@ dialog {
     background-color: var(--background-color1);
     color: var(--color2);
     border: none;
-    font-family: 'Silkscreen', sans-serif;
+    font-family: 'Welbut', sans-serif;
     padding: 2rem;
 }
 
