@@ -30,7 +30,7 @@
     --background-color1: #686868;
     --background-color2: #a8a8a8;
     --background-color-overlay: rgba(100, 100, 100, 0.9);
-    --font-size-large-screen: 22px;
+    --font-size-large-screen: 20px;
     --font-size-med-screen: 14px;
     --font-size-small-screen: 10px;
 }
@@ -42,7 +42,7 @@ body, html {
 }
 
 body {
-    font-family: 'Welbut', sans-serif;
+    font-family: 'Welbut';
     background-color: var(--background-color2);
     font-size: var(--font-size-large-screen);
 }
@@ -59,7 +59,7 @@ body {
 }
 
 input, button {
-    font-family: 'Welbut', sans-serif;
+    font-family: 'Welbut';
     padding: 0.7rem 0.7rem;
     background-color: var(--background-color-control);
     color: var(--color-control);
@@ -82,7 +82,7 @@ dialog {
     background-color: var(--background-color1);
     color: var(--color2);
     border: none;
-    font-family: 'Welbut', sans-serif;
+    font-family: 'Welbut';
     padding: 2rem;
 }
 
