@@ -59,7 +59,7 @@ body {
 }
 
 input, button {
-    font-family: 'Karmatic', sans-serif;
+    font-family: 'Welbut', sans-serif;
     padding: 0.7rem 0.7rem;
     background-color: var(--background-color-control);
     color: var(--color-control);
