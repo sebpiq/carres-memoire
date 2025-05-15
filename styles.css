@@ -7,9 +7,9 @@
     font-family: 'Silkscreen';
     src: local('Silkscreen'),
         url('./fonts/Silkscreen-Regular.ttf') format('woff');
-    font-family: 'Welbut';
-    src: local('Welbut'),
-        url('./fonts/Welbut__.ttf');
+    font-family: 'Wellbutrin';
+    src: local('Wellbutrin'),
+        url('./fonts/Wellbutrin.ttf');
     font-family: 'Karmatic';
     src: local('Karmatic'),
         url('./fonts/ka1.ttf');
@@ -42,7 +42,7 @@ body, html {
 }
 
 body {
-    font-family: 'Welbut';
+    font-family: 'Wellbutrin', sans-serif;
     background-color: var(--background-color2);
     font-size: var(--font-size-large-screen);
 }
@@ -59,7 +59,7 @@ body {
 }
 
 input, button {
-    font-family: 'Welbut';
+    font-family: 'Wellbutrin', sans-serif;
     padding: 0.7rem 0.7rem;
     background-color: var(--background-color-control);
     color: var(--color-control);
@@ -82,7 +82,7 @@ dialog {
     background-color: var(--background-color1);
     color: var(--color2);
     border: none;
-    font-family: 'Welbut';
+    font-family: 'Wellbutrin', sans-serif;
     padding: 2rem;
 }
 
