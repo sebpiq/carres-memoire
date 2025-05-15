@@ -10,6 +10,9 @@
     font-family: 'Welbut';
     src: local('Welbut'),
         url('./fonts/Welbut__.ttf');
+    font-family: 'Karmatic';
+    src: local('Karmatic'),
+        url('./fonts/ka1.ttf');
 }
 
 
@@ -27,7 +30,7 @@
     --background-color1: #686868;
     --background-color2: #a8a8a8;
     --background-color-overlay: rgba(100, 100, 100, 0.9);
-    --font-size-large-screen: 20px;
+    --font-size-large-screen: 22px;
     --font-size-med-screen: 14px;
     --font-size-small-screen: 10px;
 }
@@ -46,7 +49,7 @@ body {
 
 @media (max-width: 1200px) {
     body {
-        font-size: var(--font-size-med-screen);
+        font-size: var();
     }
 }
 @media (max-width: 800px) {
@@ -56,7 +59,7 @@ body {
 }
 
 input, button {
-    font-family: 'Welbut', sans-serif;
+    font-family: 'Karmatic', sans-serif;
     padding: 0.7rem 0.7rem;
     background-color: var(--background-color-control);
     color: var(--color-control);
