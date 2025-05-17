@@ -1,6 +1,6 @@
 const settings = {
     squareCount: 10,
-    visibleDuration: 2000,
+    visibleDuration: 1500,
     padding: 10,
     maxSquareSize: 120,
     durationShowingResults: 400,
